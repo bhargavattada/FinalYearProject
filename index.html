@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Spectrum Disorder Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        /* Logout Button Styles */
+        .logout {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000; /* Ensures it's above other elements */
+        }
+
+        .logout a {
+            text-decoration: none;
+            background-color: red;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .logout a:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logout Button -->
+        <div class="logout">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+
+        <h2>Childhood Autism Detector</h2>
+
+        <div class="blur">
+            <div class="main">
+                <form action="{{ url_for('predict') }}" method="post">
+                    <div class="form-group">
+                        <!-- A1 Score with Indicator -->
+                        <select name="a1_score" required>
+                            <option value="" disabled selected>Fever</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A2 Score with Indicator -->
+                        <select name="a2_score" required>
+                            <option value="" disabled selected>Repetitive Behavior</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A3 Score with Indicator -->
+                        <select name="a3_score" required>
+                            <option value="" disabled selected>Motor Skills</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A4 Score with Indicator -->
+                        <select name="a4_score" required>
+                            <option value="" disabled selected>Sensory Skills</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A5 Score with Indicator -->
+                        <select name="a5_score" required>
+                            <option value="" disabled selected>Daily Routine</option>
+                            <option value="2">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="0">High</option>
+                        </select>
+
+                        <!-- A6 Score with Indicator -->
+                        <select name="a6_score" required>
+                            <option value="" disabled selected>Communication</option>
+                            <option value="2">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="0">High</option>
+                        </select>
+
+                        <!-- A7 Score with Indicator -->
+                        <select name="a7_score" required>
+                            <option value="" disabled selected>Nonverbal Skills</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A8 Score with Indicator -->
+                        <select name="a8_score" required>
+                            <option value="" disabled selected>Social Interaction</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A9 Score with Indicator -->
+                        <select name="a9_score" required>
+                            <option value="" disabled selected>Adaptation</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- A10 Score with Indicator -->
+                        <select name="a10_score" required>
+                            <option value="" disabled selected>Eye Contact</option>
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                        </select>
+
+                        <!-- Age Input -->
+                        <input type="number" name="age" placeholder="Age" required>
+
+                        <!-- Dropdowns -->
+                        <select name="gender" required>
+                            <option value="" disabled selected>Gender</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+
+                        <select name="jaundice" required>
+                            <option value="" disabled selected>Jaundice (Yes/No)</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                        
+                        <select name="autism" required>
+                            <option value="" disabled selected>Autism (Yes/No)</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+
+                        <input type="number" name="relation" placeholder="Relation (Father=1, Mother=0, Other=2)" min="0" max="2" step="1" required>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" id="submit">Predict</button>
+                        <button type="reset" id="reset">Reset</button>
+                    </div>
+                </form>
+
+                <h3>{{ prediction_text }}</h3>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
